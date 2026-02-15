@@ -4,13 +4,16 @@ FROM eclipse-temurin:17-jdk-alpine
 # Set working directory
 WORKDIR /app
 
-# Copy project files
+# Copy all project files
 COPY . .
+
+# Give execution permission to mvnw (important for Linux / Render)
+RUN chmod +x mvnw
 
 # Build the application
 RUN ./mvnw clean package -DskipTests
 
-# Expose the port
+# Expose port
 EXPOSE 8080
 
 # Run the jar file
